@@ -6,9 +6,7 @@ def lookup_address(street: str, house_number: str, postal_code: str) -> dict:
     Sucht eine Berliner Adresse über die Nominatim-Suche von OpenStreetMap
     und liefert Standardadresse, Koordinaten und Adressbestandteile zurück.
     """
-
     query = f"{street} {house_number}, {postal_code} Berlin, Germany"
-
     url = "https://nominatim.openstreetmap.org/search"
     params = {
         "q": query,
@@ -16,14 +14,12 @@ def lookup_address(street: str, house_number: str, postal_code: str) -> dict:
         "addressdetails": 1,
         "limit": 1
     }
-
     headers = {
-        "User-Agent": "gutachten-tool/1.0"
+        "User-Agent": "aedvice-gutachten-tool/1.0 (https://gutachten-tool-aedvice.streamlit.app)"
     }
 
     response = requests.get(url, params=params, headers=headers, timeout=20)
     response.raise_for_status()
-
     results = response.json()
 
     if not results:
